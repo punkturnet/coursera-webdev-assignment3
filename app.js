@@ -1,23 +1,9 @@
 (function(){
   'use strict';
-  angular.module("NarrowItDownApp", [])
-  .controller("NarrowItDownController", NarrowItDownController)
-  .service("MenuService", MenuService)
-  .directive("FoundItemsDirective", FoundItemsDirective);
-
-  function FoundItemsDirective(){
-    var ddo = {
-      templateUrl: 'foundItems.html',
-      scope : {
-        foundItems : '<',
-        onRemove : '&'
-      }
-      //,controller: FoundItemsDirectiveController,
-      //controllerAs: list,
-      //bindToController: true
-    };
-    return ddo;
-  }
+  angular.module('NarrowItDownApp', [])
+  .controller('NarrowItDownController', NarrowItDownController)
+  .service('MenuService', MenuService)
+  .directive('foundItems', FoundItemsDirective);
 
   NarrowItDownController.$inject = ["MenuService"];
   function NarrowItDownController(MenuService){
@@ -39,7 +25,7 @@
 
     service.getMatchedMenuItems = function (searchTerm) {
       return $http({
-        url: "https://davids-restaurant.herokuapp.com/menu_items.json"
+        url: "http://davids-restaurant.herokuapp.com/menu_items.json"
       })
       .then(function(result){
         var foundItems = [];
@@ -51,6 +37,20 @@
         return foundItems;
       })
     };
+  }
+
+  function FoundItemsDirective(){
+    var ddo = {
+       templateUrl: 'foundItems.html',
+      scope : {
+        foundItems : '<',
+        onRemove : '&'
+      }
+      //,controller: FoundItemsDirectiveController,
+      //controllerAs: list,
+      //bindToController: true
+    };
+    return ddo;
   }
 
 })();
