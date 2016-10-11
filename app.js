@@ -38,6 +38,7 @@
       }
       else {
         narrow.message = 'Nothing found because you did not enter a search term';
+        narrow.showLoader = false;
       }
     };
 
